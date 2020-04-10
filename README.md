@@ -1,6 +1,36 @@
 # NamedPoint
 
-A package to provide named points. Just say `.top(.left)` or `.topLeft` and it will work on all platforms in all situations - we take care of the inconsistencies of for you.
+A package to provide named points of frames.
+
+```swift
+public enum NamedPoint: String, Codable, Hashable {
+    case topLeft,    topCenter,    topRight
+    case middleLeft, middleCenter, middleRight
+    case bottomLeft, bottomCenter, bottomRight
+}
+```
+
+```swift
+public enum Alignment: Codable, Hashable {
+    
+    public enum Horizontal: String, Codable {
+        case left, center, right
+    }
+
+    public enum Vertical: String, Codable {
+        case top, middle, bottom
+    }
+
+    case top(Horizontal)
+    case bottom(Horizontal)
+    case left(Vertical)
+    case right(Vertical)
+    case center
+    
+}
+```
+
+For example, just say `.top(.left)` or `.topLeft` and it will work on all platforms in all situations - we take care of the inconsistencies of for you.
 
 ```swift
 let screen = CGRect(x: 0, y: 0, width: 3440, height: 1440)
