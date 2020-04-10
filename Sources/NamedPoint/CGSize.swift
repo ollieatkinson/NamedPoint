@@ -10,9 +10,8 @@ import CoreGraphics
 public typealias AspectRatio = CGSize
 
 extension AspectRatio {
-    @inlinable public func aspectFit(inside rect: CGRect) -> CGRect {
-        .init(aspectRatio: self, inside: rect)
-    }
+    @inlinable public func aspectFit(inside rect: CGRect) -> CGRect { .init(aspectFit: self, inside: rect) }
+    @inlinable public func aspectFill(inside rect: CGRect) -> CGRect { .init(aspectFill: self, inside: rect) }
 }
 
 extension CGSize {
@@ -83,12 +82,15 @@ extension CGPoint {
 }
 
 extension CGSize {
-    @inlinable public func scalingFactor(toFit size: CGSize) -> CGFloat {
-        min(size.abs.width / abs.width, size.abs.height / abs.height)
-    }
-    @inlinable public func scaled(toFit size: CGSize) -> CGSize {
-        scalingFactor(toFit: size) * abs
-    }
+    
+    @inlinable public func scalingFactor(toFit size: CGSize) -> CGFloat { min(size.abs.width / abs.width, size.abs.height / abs.height) }
+    @inlinable public func scalingFactor(toFill size: CGSize) -> CGFloat { max(size.abs.width / abs.width, size.abs.height / abs.height) }
+    
+    @inlinable public func scaled(toFit size: CGSize) -> CGSize { scalingFactor(toFit: size) * abs }
+    @inlinable public func scaled(toFill size: CGSize) -> CGSize { scalingFactor(toFill: size) * abs }
+    
+    @inlinable public func scaled(to factor: CGFloat) -> CGSize { self * factor }
+    
 }
 
 extension SignedNumeric where Self: Comparable {

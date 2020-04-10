@@ -7,8 +7,8 @@
 
 import CoreGraphics
 
-public enum Geometry {
-    
+public enum Geometry: Hashable {
+
     public static let origin: Geometry.Origin = .os
     
     public static var isFlipped: Bool {
@@ -23,7 +23,7 @@ public enum Geometry {
 
 extension Geometry {
     
-    public enum Origin {
+    public enum Origin: String, Codable, Hashable {
         case topLeft
         case bottomLeft
     }

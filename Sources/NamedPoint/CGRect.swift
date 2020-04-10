@@ -38,8 +38,11 @@ extension CGRect {
 }
 
 extension CGRect {
-    @inlinable public init(aspectRatio: CGSize, inside rect: CGRect) {
-        self.init(aligned: .center, inside: rect, size: aspectRatio.scaled(toFit: rect.size))
+    @inlinable public init(aspectFit: CGSize, inside rect: CGRect) {
+        self.init(aligned: .center, inside: rect, size: aspectFit.scaled(toFit: rect.size))
+    }
+    @inlinable public init(aspectFill: CGSize, inside rect: CGRect) {
+        self.init(aligned: .center, inside: rect, size: aspectFill.scaled(toFill: rect.size))
     }
     @inlinable public init(size: CGSize) {
         self.init(origin: .zero, size: size)
@@ -50,17 +53,35 @@ extension CGRect {
 }
 
 extension CGRect {
+    @inlinable public func scaled(to factor: CGFloat, anchor alignment: Alignment = .center) -> CGRect {
+        scaled(to: factor, anchor: alignment.anchor)
+    }
+    @inlinable public func scaled(to factor: CGFloat, anchor namedPoint: NamedPoint = .middleCenter) -> CGRect {
+        scaled(to: factor, anchor: namedPoint.anchor)
+    }
+    @inlinable public func scaled(to factor: CGFloat, anchor: CGPoint) -> CGRect {
+        .init(origin: origin.scaled(to: factor, relativeTo: point(anchor: anchor)), size: size.scaled(to: factor))
+    }
+}
 
-    public var topLeft:   CGPoint { point(at: .topLeft) }
+extension CGPoint {
+    @inlinable public func scaled(to factor: CGFloat, relativeTo point: CGPoint) -> CGPoint {
+        self + (point - self) * (1 - factor)
+    }
+}
+
+extension CGRect {
+
+    public var topLeft: CGPoint { point(at: .topLeft) }
     public var topCenter: CGPoint { point(at: .topCenter) }
-    public var topRight:  CGPoint { point(at: .topRight) }
+    public var topRight: CGPoint { point(at: .topRight) }
     
-    public var middleLeft:  CGPoint { point(at: .middleLeft) }
-    public var center:      CGPoint { point(at: .center) }
+    public var middleLeft: CGPoint { point(at: .middleLeft) }
+    public var center: CGPoint { point(at: .center) }
     public var middleRight: CGPoint { point(at: .middleRight) }
     
-    public var bottomLeft:   CGPoint { point(at: .bottomLeft) }
+    public var bottomLeft: CGPoint { point(at: .bottomLeft) }
     public var bottomCenter: CGPoint { point(at: .bottomCenter) }
-    public var bottomRight:  CGPoint { point(at: .bottomRight) }
+    public var bottomRight: CGPoint { point(at: .bottomRight) }
     
 }

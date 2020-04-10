@@ -8,10 +8,6 @@
 import CoreGraphics
 
 extension CGPoint {
-    @inlinable public static func + (lhs: CGPoint, rhs: CGPoint) -> CGPoint {
-        CGPoint(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
-    }
-    @inlinable public static func - (lhs: CGPoint, rhs: CGPoint) -> CGPoint {
-        CGPoint(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
-    }
+    @inlinable public static func + (lhs: CGPoint, rhs: CGPoint) -> CGPoint { .init(x: lhs.x + rhs.x, y: lhs.y + rhs.y) }
+    @inlinable public static func - (lhs: CGPoint, rhs: CGPoint) -> CGPoint { .init(x: lhs.x - rhs.x, y: lhs.y - rhs.y) }
 }

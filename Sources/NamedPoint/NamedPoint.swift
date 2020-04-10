@@ -83,7 +83,5 @@ extension NamedPoint {
         case .bottomLeft, .bottomCenter, .bottomRight: return .bottom
         }
     }
-    public var anchor: CGPoint {
-        .init(x: horizontal.x, y: vertical.y)
-    }
+    public var anchor: CGPoint { .init(x: horizontal.x, y: vertical.y) }
 }

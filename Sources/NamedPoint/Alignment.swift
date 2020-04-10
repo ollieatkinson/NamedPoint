@@ -76,16 +76,8 @@ extension Alignment.Horizontal {
 extension Alignment.Vertical {
     var y: CGFloat {
         switch self {
-        case .top:
-            switch Geometry.origin {
-            case .topLeft:    return 0
-            case .bottomLeft: return 1
-            }
-        case .bottom:
-            switch Geometry.origin {
-            case .topLeft:    return 1
-            case .bottomLeft: return 0
-            }
+        case .top:    return Geometry.isFlipped ? 0 : 1
+        case .bottom: return Geometry.isFlipped ? 1 : 0
         case .middle: return 0.5
         }
     }

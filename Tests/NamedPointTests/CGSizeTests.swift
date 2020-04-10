@@ -43,4 +43,8 @@ final class CGSizeTests: XCTestCase {
         assert(AspectRatio(width: 16, height: 9).aspectFit(inside: screen)) == CGRect(x: 440, y: 0, width: 2560, height: 1440)
     }
     
+    func test_aspect_fill() {
+        assert(AspectRatio(width: 16, height: 9).aspectFill(inside: screen)) == CGRect(x: 0, y: -247.5, width: 3440, height: 1935)
+    }
+    
 }
