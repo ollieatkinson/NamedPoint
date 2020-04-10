@@ -18,7 +18,7 @@ extension NamedPoint {
         frame.point(anchor: anchor, from: origin)
     }
     public func point(in size: CGSize, from origin: Geometry.Origin = .os) -> CGPoint {
-        CGRect(size: size).point(anchor: anchor, from: origin)
+        size.point(anchor: anchor, from: origin)
     }
 }
 
