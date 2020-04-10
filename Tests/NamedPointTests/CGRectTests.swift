@@ -1,4 +1,4 @@
-import Assert
+import XCTest
 
 @testable import NamedPoint
 

@@ -7,11 +7,8 @@ let package = Package(
     products: [
         .library(name: "NamedPoint", targets: ["NamedPoint"]),
     ],
-    dependencies: [
-        .package(path: "Assert")
-    ],
     targets: [
         .target(name: "NamedPoint", dependencies: []),
-        .testTarget(name: "NamedPointTests", dependencies: ["NamedPoint", "Assert"]),
+        .testTarget(name: "NamedPointTests", dependencies: ["NamedPoint"]),
     ]
 )

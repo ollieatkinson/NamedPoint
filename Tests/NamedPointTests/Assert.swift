@@ -73,9 +73,7 @@ extension Assert where T: Comparable {
 
 infix operator ± : NilCoalescingPrecedence
 
-public func ± <T>(lhs: T, rhs: T) -> (T, T) {
-    (lhs, rhs)
-}
+public func ± <T>(lhs: T, rhs: T) -> (T, T) { (lhs, rhs) }
 
 extension Assert where T: Comparable & SignedNumeric {
 
@@ -84,18 +82,6 @@ extension Assert where T: Comparable & SignedNumeric {
     public static func ~= (lhs: Assert<T>, rhs: (T, T)) {
         assert(lhs, rhs.0) { abs($0 - $1) <= rhs.1 }
     }
-}
-
-extension Assert where T: StringProtocol {
-
-    public static func == (lhs: Assert<T>, rhs: T) {
-       assert(lhs, rhs, ==)
-    }
-
-    public static func != (lhs: Assert<T>, rhs: T) {
-        assert(lhs, rhs, !=)
-    }
-
 }
 
 public protocol OptionalType {
@@ -121,90 +107,4 @@ extension Assert where T: OptionalType {
 
 private func assert<T>(_ a: Assert<T>, _ b: T, _ op: (T, T) -> Bool) {
     XCTAssert(op(a.value, b), a.message, file: a.file, line: a.line)
-}
-
-private func assert<T>(_ a: Assert<T>, _ b: T, _ op: (T, T) -> Bool) where T: StringProtocol {
-    let difference = descriptionOfDifference(
-        between: a.value.seperatedByNewLine,
-        and: b.seperatedByNewLine
-    )
-    XCTAssert(op(a.value, b), [ a.message, difference ].joined(separator: "\n"), file: a.file, line: a.line)
-}
-
-private func assertEqual<T>(_ a: Assert<T>, _ b: T) where T: Equatable {
-}
-
-fileprivate extension String {
-    init<T>(dumping object: T) {
-        self.init()
-        dump(object, to: &self)
-    }
-}
-
-@available(OSX 10.15, *)
-extension CollectionDifference.Change {
-    var offset: Int {
-        switch self {
-        case let .insert(offset, _, _), let .remove(offset, _, _):
-            return offset
-        }
-    }
-    
-    var removeFirst: Int {
-        switch self {
-        case .insert:
-            return 1
-        case .remove:
-            return 0
-        }
-    }
-}
-
-extension Collection {
-    public func sorted<T>(by keyPath: KeyPath<Element, T>) -> [Element] where T: Comparable {
-        sorted(by: { $0[keyPath: keyPath] < $1[keyPath: keyPath]  })
-    }
-}
-
-private func descriptionOfDifference<T>(between a: T, and b: T, printLineNumber: Bool = true) -> String
-    where T: Equatable, T: BidirectionalCollection, T.Element: Hashable
-{
-    
-    guard #available(OSX 10.15, *) else {
-        if a != b {
-            return "\(a) is not equal to \(b)"
-        } else {
-            return ""
-        }
-    }
-    
-    let difference = a.difference(from: b)
-    
-    guard difference.isEmpty == false else {
-        return ""
-    }
-    
-    func prefix(with offset: Int) -> String {
-        printLineNumber ? "\(offset):\t" : ""
-    }
-    
-    let string = difference.sorted(by: \.offset).sorted(by: \.removeFirst).map { diff -> String in
-        switch diff {
-        case let .insert(offset: offset, element: line, associatedWith: _):
-            return prefix(with: offset).appending("got      \(line)")
-        case let .remove(offset: offset, element: line, associatedWith: _):
-            return prefix(with: offset).appending("expected \(line)")
-        }
-    }
-    
-    return """
-    Found a difference:
-    \(string.joined(separator: "\n"))
-    """
-}
-
-extension StringProtocol {
-    var seperatedByNewLine: [String] {
-        components(separatedBy: "\n")
-    }
 }
