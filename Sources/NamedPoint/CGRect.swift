@@ -64,12 +64,6 @@ extension CGRect {
     }
 }
 
-extension CGPoint {
-    @inlinable public func scaled(to factor: CGFloat, relativeTo point: CGPoint) -> CGPoint {
-        self + (point - self) * (1 - factor)
-    }
-}
-
 extension CGRect {
 
     public var topLeft: CGPoint { point(at: .topLeft) }
