@@ -48,3 +48,19 @@ extension CGRect {
         self.init(origin: .zero, size: .init(square: length))
     }
 }
+
+extension CGRect {
+
+    public var topLeft:   CGPoint { point(at: .topLeft) }
+    public var topCenter: CGPoint { point(at: .topCenter) }
+    public var topRight:  CGPoint { point(at: .topRight) }
+    
+    public var middleLeft:  CGPoint { point(at: .middleLeft) }
+    public var center:      CGPoint { point(at: .center) }
+    public var middleRight: CGPoint { point(at: .middleRight) }
+    
+    public var bottomLeft:   CGPoint { point(at: .bottomLeft) }
+    public var bottomCenter: CGPoint { point(at: .bottomCenter) }
+    public var bottomRight:  CGPoint { point(at: .bottomRight) }
+    
+}

@@ -83,8 +83,12 @@ extension CGPoint {
 }
 
 extension CGSize {
-    @inlinable public func scalingFactor(toFit size: CGSize) -> CGFloat { min(size.abs.width / abs.width, size.abs.height / abs.height) }
-    @inlinable public func scaled(toFit size: CGSize) -> CGSize { scalingFactor(toFit: size) * abs }
+    @inlinable public func scalingFactor(toFit size: CGSize) -> CGFloat {
+        min(size.abs.width / abs.width, size.abs.height / abs.height)
+    }
+    @inlinable public func scaled(toFit size: CGSize) -> CGSize {
+        scalingFactor(toFit: size) * abs
+    }
 }
 
 extension SignedNumeric where Self: Comparable {
