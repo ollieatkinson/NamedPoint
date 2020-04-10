@@ -1,6 +1,6 @@
 # NamedPoint
 
-A package to provide named points of frames.
+A package to provide names for points in a frame.
 
 ```swift
 public enum NamedPoint: String, Codable, Hashable {
