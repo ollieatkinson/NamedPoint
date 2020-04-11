@@ -22,9 +22,12 @@ public enum Alignment: Codable, Hashable {
     }
 
     case top(Horizontal)
+    case middle(Horizontal)
     case bottom(Horizontal)
+    
     case left(Vertical)
     case right(Vertical)
+    
     case center
     
 }

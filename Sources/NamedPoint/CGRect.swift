@@ -71,7 +71,7 @@ extension CGRect {
     public var topRight: CGPoint { point(at: .topRight) }
     
     public var middleLeft: CGPoint { point(at: .middleLeft) }
-    public var center: CGPoint { point(at: .center) }
+    public var center: CGPoint { point(at: .middleCenter) }
     public var middleRight: CGPoint { point(at: .middleRight) }
     
     public var bottomLeft: CGPoint { point(at: .bottomLeft) }

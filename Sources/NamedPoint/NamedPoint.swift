@@ -31,6 +31,12 @@ extension NamedPoint {
             case .center: self = .topCenter
             case .right:  self = .topRight
             }
+        case let .middle(h):
+            switch h {
+            case .left:   self = .middleLeft
+            case .center: self = .middleCenter
+            case .right:  self = .middleRight
+            }
         case let .bottom(h):
             switch h {
             case .left:   self = .bottomLeft
@@ -58,9 +64,9 @@ extension NamedPoint {
         case .topLeft:      return .top(.left)
         case .topCenter:    return .top(.center)
         case .topRight:     return .top(.right)
-        case .middleLeft:   return .left(.middle)
+        case .middleLeft:   return .middle(.left)
         case .middleCenter: return .center
-        case .middleRight:  return .right(.middle)
+        case .middleRight:  return .middle(.right)
         case .bottomLeft:   return .bottom(.left)
         case .bottomCenter: return .bottom(.center)
         case .bottomRight:  return .bottom(.right)

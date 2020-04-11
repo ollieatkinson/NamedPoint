@@ -18,9 +18,12 @@ public enum Alignment: Codable, Hashable {
     }
 
     case top(Horizontal)
+    case middle(Horizontal)
     case bottom(Horizontal)
+    
     case left(Vertical)
     case right(Vertical)
+    
     case center
     
 }
@@ -33,6 +36,7 @@ extension Alignment {
     public var opposite: Alignment {
         switch self {
         case let .top(h):    return .bottom(h)
+        case let .middle(h): return .middle(h)
         case let .bottom(h): return .top(h)
         case     .center:    return .center
         case let .left(v):   return .right(v)
@@ -43,6 +47,7 @@ extension Alignment {
     public var spacing: CGSize {
         switch self {
         case .top:    return .init(width: 0, height: Geometry.isFlipped ? 1 : -1)
+        case .middle: return .init(width: 0, height: 0)
         case .bottom: return .init(width: 0, height: Geometry.isFlipped ? -1 : 1)
         case .center: return .init(width: 0, height: 0)
         case .left:   return .init(width: 1, height: 0)
