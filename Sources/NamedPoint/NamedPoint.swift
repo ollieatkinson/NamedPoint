@@ -23,7 +23,7 @@ extension NamedPoint {
 }
 
 extension NamedPoint {
-    init(_ alignment: Alignment) {
+    init(_ alignment: NamedAlignment) {
         switch alignment {
         case let .top(h):
             switch h {
@@ -59,30 +59,17 @@ extension NamedPoint {
             }
         }
     }
-    var alignment: Alignment {
-        switch self {
-        case .topLeft:      return .top(.left)
-        case .topCenter:    return .top(.center)
-        case .topRight:     return .top(.right)
-        case .middleLeft:   return .middle(.left)
-        case .middleCenter: return .center
-        case .middleRight:  return .middle(.right)
-        case .bottomLeft:   return .bottom(.left)
-        case .bottomCenter: return .bottom(.center)
-        case .bottomRight:  return .bottom(.right)
-        }
-    }
 }
 
 extension NamedPoint {
-    public var horizontal: Alignment.Horizontal {
+    public var horizontal: NamedAlignment.Horizontal {
         switch self {
         case .topLeft,   .middleLeft,   .bottomLeft:   return .left
         case .topCenter, .middleCenter, .bottomCenter: return .center
         case .topRight,  .middleRight,  .bottomRight:  return .right
         }
     }
-    public var vertical: Alignment.Vertical {
+    public var vertical: NamedAlignment.Vertical {
         switch self {
         case .topLeft,    .topCenter,    .topRight:    return .top
         case .middleLeft, .middleCenter, .middleRight: return .middle
