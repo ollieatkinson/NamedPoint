@@ -11,13 +11,13 @@ public enum Geometry: Hashable {
 
     public static let origin: Geometry.Origin = .os
     
-    public static var isFlipped: Bool {
+    public static var isFlipped: Bool = {
 #if os(macOS)
         return false
 #else
         return true
 #endif
-    }
+    }()
     
 }
 
